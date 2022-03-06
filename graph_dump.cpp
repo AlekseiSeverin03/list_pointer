@@ -24,6 +24,20 @@ int Start_Dot_File (const char name_file[])
 }
 
 
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+int End_Dot_File (const char name_file[])
+{
+	assert (file_out != NULL);
+
+	fprintf (file_out, "}\n");
+
+	Close_File (file_out, name_file);
+
+	return 0;
+}
+
+
 
 // Functions for progect "LIST"
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -40,20 +54,6 @@ int Make_Info_List (int head, int tail, int size, int free)
 					   "		size [label = \"SIZE | %d\", fillcolor = \"green\"];\n"
 					   "		free [label = \"FREE | %d\", fillcolor = \"green\"];\n"
 					   "	}\n", head, tail, size, free);
-	return 0;
-}
-
-
-//-------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------
-int End_Dot_File (const char name_file[])
-{
-	assert (file_out != NULL);
-
-	fprintf (file_out, "}\n");
-
-	Close_File (file_out, name_file);
-
 	return 0;
 }
 
@@ -201,6 +201,55 @@ int Preamble (int depth)
 	
 	
 
+
+// Functions for project "LIST" (on pointers)
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+int Make_Info_L (int size)
+{
+	fprintf (file_out, "	size [shape = record, label = \"SIZE: %d\", "
+					   "fillcolor = \"green\"];\n",  size);
+
+	return 0;
+}
+
+
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+int Make_Node_IP (char *ip, char *prev, int data, char *next, 
+				  const char fillcolor[])
+{
+	assert (fillcolor != NULL);
+
+	fprintf (file_out, "p%p [label = " LABEL_NODE_LIST_P ", fillcolor = \"%s\"];\n", 
+			 ip, ip, prev, data, next, fillcolor);
+
+	return 0;
+}
+	
+
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+int Make_Connection_IP (int *ip_from, int *ip_to,
+					 	const char color[], const char frontcolor[],
+					 	const char label[])
+{
+//	assert (id_from    >= 0);
+//	assert (id_to      >= 0);
+	assert (color      != NULL);
+	assert (frontcolor != NULL);
+	assert (label      != NULL);
+
+	fprintf (file_out, "\tp%p->p%p [color = \"%s\","
+                       " frontcolor = \"%s\","
+					   " label = \"%s\"];\n",
+						ip_from, ip_to, color, frontcolor, label);
+
+	return 0;
+}
 
 
 

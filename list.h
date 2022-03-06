@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include "graph_dump.h"
 
 
 typedef int                  data_t;
@@ -36,7 +37,19 @@ const int     ERR_ALLOC  = 1;
 
 int ListCtor    (info_list_t *info);
 int ListDtor    (info_list_t *info);
-int ListInsert  (info_list_t *info, data_t data);
+int NodeInsert  (info_list_t *info, data_t data);
+int NodeDelete  (info_list_t *info);
+int ListDelete  (info_list_t *info);
+int RecurAdd    (list_t *cur_node, list_t *fix);
+int AddPrev     (list_t *cur_node, list_t *fix);
+
+int ListPush_F  (info_list_t *info, data_t data);
+int ListPush_B  (info_list_t *info, data_t data);
+int ListPop_F   (info_list_t *info, data_t *data);
+int ListPop_B   (info_list_t *info, data_t *data);
+
+int PrintInfoList    (info_list_t *info_list);
+int Graph_Dump_List  (info_list_t *info_list);
 
 
 

@@ -1,0 +1,13 @@
+digraph List
+{
+	rankdir = LR;
+	size [shape = record, label = "SIZE: 4", fillcolor = "green"];
+node [shape = record, style = filled];
+p0x1536067b0 [label = "IP: 0x1536067b0 | { prev\n 0x153606750 | data\n 200 | next\n0x153606770 } ", fillcolor = "grey"];
+p0x153606770 [label = "IP: 0x153606770 | { prev\n 0x1536067b0 | data\n 100 | next\n0x153606790 } ", fillcolor = "grey"];
+p0x153606790 [label = "IP: 0x153606790 | { prev\n 0x153606770 | data\n 101 | next\n0x1536067d0 } ", fillcolor = "grey"];
+p0x1536067d0 [label = "IP: 0x1536067d0 | { prev\n 0x153606790 | data\n 102 | next\n0x153606750 } ", fillcolor = "grey"];
+	p0x1536067b0->p0x153606770 [color = "black", frontcolor = "", label = ""];
+	p0x153606770->p0x153606790 [color = "black", frontcolor = "", label = ""];
+	p0x153606790->p0x1536067d0 [color = "black", frontcolor = "", label = ""];
+}

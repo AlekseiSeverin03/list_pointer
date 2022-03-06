@@ -15,6 +15,8 @@
 #define LABEL_NODE_LIST_1  "\"index: %d | { prev\\n %d | data\\n %d | next\\n%d } \""
 #define LABEL_NODE_LIST_2  "\"name: %s | { prev\\n %d | data\\n %d | next\\n%d } \""
 
+#define LABEL_NODE_LIST_P  "\"IP: %p | { prev\\n %p | data\\n %d | next\\n%p } \""
+
 
 #define LABEL_NODE_TREE_1  "\"data: %d | { <fl%d> lefr child | <fr%d> right child } \""
 #define LABEL_NODE_TREE_2  "\"data: %d\""
@@ -51,6 +53,15 @@ int Make_Info_Tree        (int depth);
 int Make_Node             (int depth, int data, const char fillcolor[]);
 int Make_Connection       (int parent_data, int child_data, const char color[],
 						   const char frontcolor[]); 
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Func for project "List"
+
+int Make_Info_L  (int size);
+int Make_Node_IP (char *ip, char *prev, int data, char *next, const char fillcolor[]);
+int Make_Connection_IP (int *ip_from, int *ip_to, const char color[],
+						const char frontcolor[], const char label[]);
+
 
 
 int Make_All              ();
