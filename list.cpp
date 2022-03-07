@@ -47,7 +47,7 @@ int ListDtor (info_list_t *info_list)
 
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
-int NodeInsert (info_list_t *info_list, data_t data)
+int CurAfterInsert (info_list_t *info_list, data_t data)
 {
 	assert (info_list != NULL);
 
@@ -73,7 +73,7 @@ int NodeInsert (info_list_t *info_list, data_t data)
 
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
-int NodeDelete (info_list_t *info_list)
+int CurDelete (info_list_t *info_list)
 {
 	assert (info_list != NULL);
 
@@ -117,6 +117,102 @@ int ListDelete (info_list_t *info_list)
 		temp = temp1;
 	}
 
+	return 0;
+}
+
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+int SearchNode (info_list_t *info_list, data_t data, list_t *node)
+{
+	assert (info_list != NULL);
+	assert (node != NULL);
+
+	list_t *cur_node = FIX_NODE->next;
+	
+	for (int count = 0; count < SIZE; count++)
+	{
+		if (cur_node == FIX_NODE)
+		{
+			node = NULL;
+			break;
+		}
+
+		if (cur_node->data == data)
+		{
+			node = cur_node;
+			break;
+		}
+
+		cur_node = cur_node->next;
+	}
+
+	return 0;
+}
+
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+int NodeInsertAfter (info_list_t *info_list, data_t data, list_t *node)
+{
+	assert (info_list != NULL);
+	assert (node != NULL);
+	
+	list_t *temp = (list_t *) calloc (1, sizeof (list_t));
+	if (temp == NULL)
+	{
+		return ERR_ALLOC;
+	}
+	
+	temp->data = data;
+	temp->next = node->next;
+	temp->prev = node;
+
+	node->next->prev = temp;
+	node->next       = temp;
+
+	SIZE++;
+	return 0;
+}
+
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+int NodeInsertBefore (info_list_t *info_list, data_t data, list_t *node)
+{
+	assert (info_list != NULL);
+	assert (node != NULL);
+	
+	list_t *temp = (list_t *) calloc (1, sizeof (list_t));
+	if (temp == NULL)
+	{
+		return ERR_ALLOC;
+	}
+	
+	temp->data = data;
+	temp->prev = node->prev;
+	temp->next = node;
+
+	node->prev->next = temp;
+	node->prev       = temp;
+
+	SIZE++;
+	return 0;
+}
+
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+int NodeDelete (info_list_t *info_list, list_t *node)
+{
+	assert (node != NULL);
+	 
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+
+	free (node);                 // TODO  if
+
+	SIZE--;
 	return 0;
 }
 

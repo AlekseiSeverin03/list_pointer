@@ -35,13 +35,18 @@ const int     ERR_ALLOC  = 1;
 
 
 
-int ListCtor    (info_list_t *info);
-int ListDtor    (info_list_t *info);
-int NodeInsert  (info_list_t *info, data_t data);
-int NodeDelete  (info_list_t *info);
-int ListDelete  (info_list_t *info);
-int RecurAdd    (list_t *cur_node, list_t *fix);
-int AddPrev     (list_t *cur_node, list_t *fix);
+int ListCtor        (info_list_t *info);
+int ListDtor        (info_list_t *info);
+int CurAfterInsert  (info_list_t *info, data_t data);
+int CurDelete       (info_list_t *info);
+int ListDelete      (info_list_t *info);
+int SearchNode      (info_list_t *info, data_t data, list_t *list);
+int NodeInsertAfter (info_list_t *info, data_t data, list_t *list);
+int NodeInsertBefore(info_list_t *info, data_t data, list_t *list);
+int NodeDelete      (info_list_t *info, list_t *list);
+
+int RecurAdd        (list_t *cur_node, list_t *fix);
+int AddPrev         (list_t *cur_node, list_t *fix);
 
 int ListPush_F  (info_list_t *info, data_t data);
 int ListPush_B  (info_list_t *info, data_t data);
